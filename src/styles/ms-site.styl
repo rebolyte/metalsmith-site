@@ -1,9 +1,14 @@
+@import 'jeet'
+// edit()
+
 body
 	font-family: sans-serif
 
 .container
-	width: 800px
-	margin: 0 auto
+	center(800px, 20px)
+
+img
+	max-width: 100%
 	
 h1
 	color: #008040
@@ -11,13 +16,30 @@ h1
 nav 
 	margin-bottom: 15px
 	a
-		display: inline-block
+		inline-block()
 		padding: 10px
 		text-decoration: none
 		background-color: #008040
 		color: black
 		border-radius: 4px
-	
+
+.portfolio article
+	col(1/2, cycle: 2)
+	// Note that you can't place a Rupture statement right after a Jeet plugin
+	// statement. i.e., don't remove this margin-bottom statement.
+	margin-bottom: 20px
+		+below(550px)
+			stack()
+
+.blogPosts
+	col(3/4)
+
+.blogSidebar
+	col(1/4)
+	background-color: #eee
+	+below(550px)
+		stack()
+
 footer
 	font-size: 10pt
 	width: 800px

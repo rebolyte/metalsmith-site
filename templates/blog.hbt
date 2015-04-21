@@ -15,7 +15,7 @@
 
 <h1>{{ title }}</h1>
 
-<article>
+<article class="blogPosts">
     <ul>
         {{#each collections.posts}}
             <li>
@@ -25,6 +25,17 @@
                 <article>{{{ this.excerpt }}}</article>
             </li>
         {{/each}}
+    </ul>
+</article>
+
+<article class="blogSidebar">
+    <p>This is some text in the sidebar.</p>
+
+    <p>Perhaps a blogroll:</p>
+    <ul>
+        <li>Link</li>
+        <li>Link</li>
+        <li>Link</li>
     </ul>
 </article>
 

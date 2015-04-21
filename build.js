@@ -9,11 +9,10 @@ var stylus 		= require('metalsmith-stylus');
 var metadata	= require('metalsmith-metadata');
 var branch 		= require('metalsmith-branch');
 var moment 		= require('moment');
+var jeet		= require('jeet');
+var axis 		= require('axis');
+var rupture		= require('rupture');
 
-// var plugin = function (files, metalsmith, done) {
-// 	console.log(files);
-// 	done();
-// };
 
 Handlebars.registerHelper('formatDate', function(date) {
 	return moment(date).format('D-MMM-YYYY');
@@ -94,8 +93,8 @@ Metalsmith(__dirname)
 			footer: 'partials/footer'
 		}
 	}))
-	.use(stylus())
-	// .use(plugin)
+	.use(stylus({ use: [ jeet(), axis(), rupture() ] }))
+	// .use(stylus({ use: axis() }))
 	.build(function(err){
 		if (err) throw err;
 	});

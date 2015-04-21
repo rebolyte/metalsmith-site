@@ -2,8 +2,26 @@ body {
   font-family: sans-serif;
 }
 .container {
-  width: 800px;
-  margin: 0 auto;
+  *zoom: 1;
+  width: auto;
+  max-width: 800px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.container:before,
+.container:after {
+  content: '';
+  display: table;
+}
+.container:after {
+  clear: both;
+}
+img {
+  max-width: 100%;
 }
 h1 {
   color: #008040;
@@ -16,14 +34,112 @@ nav a {
   padding: 10px;
   text-decoration: none;
   background-color: #008040;
-  color: #000;
+  color: #222;
   border-radius: 4px;
+}
+.portfolio article {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 48.5%;
+  margin-left: 0%;
+  margin-right: 3%;
+  margin-bottom: 20px;
+}
+.portfolio article:before,
+.portfolio article:after {
+  content: '';
+  display: table;
+}
+.portfolio article:after {
+  clear: both;
+}
+.portfolio article:nth-child(2n) {
+  margin-right: 0%;
+  float: right;
+}
+.portfolio article:nth-child(2n+1) {
+  clear: both;
+}
+@media only screen and (max-width: 550px) {
+  .portfolio article {
+    display: block;
+    clear: both;
+    float: none;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .portfolio article:first-child {
+    margin-left: auto;
+  }
+  .portfolio article:last-child {
+    margin-right: auto;
+  }
+}
+.blogPosts {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 74.25%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+.blogPosts:before,
+.blogPosts:after {
+  content: '';
+  display: table;
+}
+.blogPosts:after {
+  clear: both;
+}
+.blogPosts:last-child {
+  margin-right: 0%;
+}
+.blogSidebar {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 22.75%;
+  margin-left: 0%;
+  margin-right: 3%;
+  background-color: #eee;
+}
+.blogSidebar:before,
+.blogSidebar:after {
+  content: '';
+  display: table;
+}
+.blogSidebar:after {
+  clear: both;
+}
+.blogSidebar:last-child {
+  margin-right: 0%;
+}
+@media only screen and (max-width: 550px) {
+  .blogSidebar {
+    display: block;
+    clear: both;
+    float: none;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .blogSidebar:first-child {
+    margin-left: auto;
+  }
+  .blogSidebar:last-child {
+    margin-right: auto;
+  }
 }
 footer {
   font-size: 10pt;
   width: 800px;
   margin: 0 auto;
   background-color: #ccc;
-  color: #000;
+  color: #222;
   padding: 10px;
 }
