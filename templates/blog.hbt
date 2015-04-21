@@ -1,16 +1,36 @@
-{{> header}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>{{ title }} | Metalsmith Site</title>
+	
+	<link rel="stylesheet" type="text/css" href="{{ link 'styles/ms-site.css' }}" />
+</head>
+<body>
 
-<h2>{{title}}</h2>
+<section class="container">
+{{> header }}
+{{> nav }}
+
+<h1>{{ title }}</h1>
 
 <article>
     <ul>
         {{#each collections.posts}}
             <li>
                 <h3><a href="{{link this.path}}">{{ this.title }}</a></h3>
-                <article>{{{ this.contents }}}</article>
+                <h5>Posted by {{ this.author }} on {{ formatDate this.date }}</h5>
+                {{!-- can be this.contents to get the whole thing --}}
+                <article>{{{ this.excerpt }}}</article>
             </li>
         {{/each}}
     </ul>
 </article>
 
+</section>
+
 {{> footer}}
+
+</body>
+</html>

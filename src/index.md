@@ -3,9 +3,10 @@ title: Home
 template: home.hbt
 permalink: false
 ---
-This is the index page.
 
-## Hello and welcome!
+# Hello and welcome!
+
+This is the index page.
 
 Testing again.
 

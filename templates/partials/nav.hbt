@@ -1,7 +1,7 @@
 <nav>
-	<a href="./">Home</a>
-	<a href="portfolio/">Portfolio</a>
-	<a href="about/">About</a>
-	<a href="contact/">Contact</a>
-	<a href="blog/">Blog</a>
-</nav>
+	<a href="{{ link '' }}">Home</a>
+	<a href="{{ link 'portfolio/' }}">Portfolio</a>
+	<a href="{{ link 'about/' }}">About</a>
+	<a href="{{ link 'contact/' }}">Contact</a>
+	<a href="{{ link 'blog/' }}">Blog</a>
+</nav> 

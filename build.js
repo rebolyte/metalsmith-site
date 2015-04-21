@@ -2,15 +2,22 @@ var Metalsmith 	= require('metalsmith');
 var collections	= require('metalsmith-collections');
 var permalinks	= require('metalsmith-permalinks');
 var	markdown 	= require('metalsmith-markdown');
+var excerpts 	= require('metalsmith-excerpts');
 var templates 	= require('metalsmith-templates');
 var Handlebars  = require('handlebars');
 var stylus 		= require('metalsmith-stylus');
 var metadata	= require('metalsmith-metadata');
+var branch 		= require('metalsmith-branch');
+var moment 		= require('moment');
 
 // var plugin = function (files, metalsmith, done) {
 // 	console.log(files);
 // 	done();
 // };
+
+Handlebars.registerHelper('formatDate', function(date) {
+	return moment(date).format('D-MMM-YYYY');
+});
 
 var autoTemplate = function(config) {
     var pattern = new RegExp(config.pattern);
@@ -29,16 +36,8 @@ var autoTemplate = function(config) {
 };
 
 Metalsmith(__dirname)
-	.use(collections({
-		pages: {
-			pattern: 'content/pages/*.md'
-		},
-		posts: {
-			pattern: 'content/posts/*.md',
-			sortBy: 'date',
-			reverse: true
-		}
-	}))
+	.source('./src')
+	.destination('./build')
 	.use(metadata({
 		file: 'meta.json',
 	}))
@@ -50,18 +49,42 @@ Metalsmith(__dirname)
 		});
 		done();
 	})
-	.use(autoTemplate({
-		pattern: 'posts',
-		templateName: 'post.hbt'
-	}))
 	.use(markdown({
 	  smartypants: true,
 	  gfm: true,
 	  tables: true
 	}))
-	.use(permalinks({
-		pattern: ':collection/:title'
+	.use(excerpts())
+	.use(collections({
+		pages: {
+			pattern: 'pages/*.html'
+		},
+		posts: {
+			pattern: 'blog/posts/*.html',
+			sortBy: 'date',
+			reverse: true
+		}
 	}))
+	.use(function (files, metalsmith, done) {
+		// console.log(files);
+		done();
+	})
+	.use(autoTemplate({
+		// Automatically supply the "post.hbt" template for everything in the posts
+		// collection.
+		pattern: 'blog/posts',
+		templateName: 'post.hbt'
+	}))
+	.use(branch('blog/posts/**.html')
+		.use(permalinks({
+			pattern: 'blog/:title'
+		}))
+	)
+	.use(branch('pages/**.html')
+		.use(permalinks({
+			pattern: ':url'
+		}))
+	)
 	.use(templates({
 		engine: 'handlebars',
 		directory: 'templates',

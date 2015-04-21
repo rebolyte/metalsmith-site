@@ -5,7 +5,7 @@
 	
 	<title>{{ title }} | Metalsmith Site</title>
 	
-	<link rel="stylesheet" type="text/css" href="styles/ms-site.css" />
+	<link rel="stylesheet" type="text/css" href="{{ link 'styles/ms-site.css' }}" />
 </head>
 <body>
 
