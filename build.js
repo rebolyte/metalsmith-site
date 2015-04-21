@@ -7,12 +7,6 @@ var Handlebars  = require('handlebars');
 var stylus 		= require('metalsmith-stylus');
 var metadata	= require('metalsmith-metadata');
 
-var meta = null;
-
-Handlebars.registerHelper('link', function(path) {
-    return metadata.baseUrl + '/' + path;
-});
-
 // var plugin = function (files, metalsmith, done) {
 // 	console.log(files);
 // 	done();
@@ -46,11 +40,14 @@ Metalsmith(__dirname)
 		}
 	}))
 	.use(metadata({
-		meta: 'meta.json',
+		file: 'meta.json',
 	}))
 	.use(function (files, metalsmith, done) {
-		meta = metalsmith.metadata();
-		console.log('done');
+		// This is my own "plugin" to load the metadata and register the Handlebars helper
+		var metadata = metalsmith.metadata().file;
+		Handlebars.registerHelper('link', function(path) {
+			return metadata.baseUrl + '/' + path;
+		});
 		done();
 	})
 	.use(autoTemplate({
