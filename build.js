@@ -70,6 +70,7 @@ Metalsmith(__dirname)
 		directory: 'templates',
 		partials: {
 			header: 'partials/header',
+			nav: 	'partials/nav',
 			footer: 'partials/footer'
 		}
 	}))

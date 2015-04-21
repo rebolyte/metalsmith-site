@@ -1,9 +1,26 @@
 body {
   font-family: sans-serif;
 }
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
 h1 {
   color: #008040;
 }
+nav a {
+  display: inline-block;
+  padding: 10px;
+  text-decoration: none;
+  background-color: #008040;
+  color: #000;
+  border-radius: 2px;
+}
 footer {
   font-size: 10pt;
+  width: 800px;
+  margin: 0 auto;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
 }

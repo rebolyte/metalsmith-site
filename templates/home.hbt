@@ -8,10 +8,14 @@
 	<link rel="stylesheet" type="text/css" href="styles/ms-site.css" />
 </head>
 <body>
-	
+
+<section class="container">
 {{> header }}
+{{> nav }}
 
 {{{ contents }}}
+
+</section>
 
 {{> footer }}
 
