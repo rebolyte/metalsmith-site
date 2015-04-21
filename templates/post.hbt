@@ -1,0 +1,7 @@
+{{> header }}
+
+<h2>Blog post: {{ title }} </h2>
+
+{{{ contents }}}
+
+{{> footer }}

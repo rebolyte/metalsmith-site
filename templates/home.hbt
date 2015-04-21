@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>{{ title }} | Metalsmith Site</title>
+	
+	<link rel="stylesheet" type="text/css" href="styles/ms-site.css" />
+</head>
+<body>
+	
+{{> header }}
+
+{{{ contents }}}
+
+{{> footer }}
+
+</body>
+</html>
