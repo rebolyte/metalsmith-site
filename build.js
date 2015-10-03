@@ -8,6 +8,8 @@ var Handlebars  = require('handlebars');
 var stylus 		= require('metalsmith-stylus');
 var metadata	= require('metalsmith-metadata');
 var branch 		= require('metalsmith-branch');
+var copy 		= require('metalsmith-copy');
+var ignore		= require('metalsmith-ignore');
 var moment 		= require('moment');
 var jeet		= require('jeet');
 var axis 		= require('axis');
@@ -32,6 +34,12 @@ var autoTemplate = function(config) {
         }
         done();
     };
+};
+
+var inCollection = function(collection) {
+	return function (filename, props, i) {
+		return (props.collection && (props.collection[0] === collection));
+	};
 };
 
 Metalsmith(__dirname)
@@ -62,6 +70,9 @@ Metalsmith(__dirname)
 			pattern: 'blog/posts/*.html',
 			sortBy: 'date',
 			reverse: true
+		},
+		academics: {
+			pattern: 'academics/*.html'
 		}
 	}))
 	.use(function (files, metalsmith, done) {
@@ -79,11 +90,36 @@ Metalsmith(__dirname)
 			pattern: 'blog/:title'
 		}))
 	)
-	.use(branch('pages/**.html')
+	.use(branch('pages/*.html')
 		.use(permalinks({
 			pattern: ':url'
 		}))
 	)
+	.use(branch(inCollection('academics'))
+		.use(permalinks({
+			pattern: 'academics/:url'
+		}))
+	)
+	// .use(branch('academics/*.html')
+	// 	// .use(ignore(['academics/index.html']))
+	// 	.use(permalinks({
+	// 		pattern: 'academics/:url'
+	// 	}))
+	// )
+	// .use(branch('pages/**/*.html')
+	// 	.use(function (files, metalsmith, done) {
+	// 		// console.log(files);
+	// 		done();
+	// 	})
+	// 	.use(copy({
+	// 		pattern: 'pages/**',
+	// 		transform: function (file) {
+	// 			var filename = file.slice(6, -5);
+	// 			console.log(filename);
+	// 			return filename + '/index.html';
+	// 		}
+	// 	}))
+	// )
 	.use(templates({
 		engine: 'handlebars',
 		directory: 'templates',
