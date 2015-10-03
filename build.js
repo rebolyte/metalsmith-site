@@ -41,6 +41,18 @@ var inCollection = function(collection) {
 		return (props.collection && (props.collection[0] === collection));
 	};
 };
+var anyCollections = function (collections) {
+	return function (filename, props, i) {
+		var out = false;
+		collections.forEach(function (coll) {
+			// if (props.collection && (collections.indexOf(props.collection[0]) !== -1)) {
+			if (inCollection(coll)(filename, props, i)) {
+				out =  true;
+			}
+		});
+		return out;
+	};
+};
 
 Metalsmith(__dirname)
 	.source('./src')
@@ -73,6 +85,9 @@ Metalsmith(__dirname)
 		},
 		academics: {
 			pattern: 'academics/*.html'
+		},
+		writing:  {
+			pattern: 'writing/*.html'
 		}
 	}))
 	.use(function (files, metalsmith, done) {
@@ -95,9 +110,9 @@ Metalsmith(__dirname)
 			pattern: ':url'
 		}))
 	)
-	.use(branch(inCollection('academics'))
+	.use(branch(anyCollections(['academics', 'writing']))
 		.use(permalinks({
-			pattern: 'academics/:url'
+			pattern: ':collection/:url'
 		}))
 	)
 	// .use(branch('academics/*.html')
