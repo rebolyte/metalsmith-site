@@ -8,8 +8,6 @@ var Handlebars  = require('handlebars');
 var stylus 		= require('metalsmith-stylus');
 var metadata	= require('metalsmith-metadata');
 var branch 		= require('metalsmith-branch');
-var copy 		= require('metalsmith-copy');
-var ignore		= require('metalsmith-ignore');
 var moment 		= require('moment');
 var jeet		= require('jeet');
 var axis 		= require('axis');
@@ -45,7 +43,6 @@ var anyCollections = function (collections) {
 	return function (filename, props, i) {
 		var out = false;
 		collections.forEach(function (coll) {
-			// if (props.collection && (collections.indexOf(props.collection[0]) !== -1)) {
 			if (inCollection(coll)(filename, props, i)) {
 				out =  true;
 			}

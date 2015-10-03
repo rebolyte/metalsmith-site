@@ -1,7 +1,7 @@
 {
   "name": "first-working-metalsmith-site",
   "private": true,
-  "dependencies": {
+  "devDependencies": {
     "axis": "^0.3.1",
     "handlebars": "^3.0.0",
     "jeet": "^6.1.2",
@@ -16,10 +16,5 @@
     "metalsmith-templates": "^0.6.0",
     "moment": "^2.10.2",
     "rupture": "^0.6.1"
-  },
-  "devDependencies": {
-    "metalsmith-copy": "^0.2.1",
-    "metalsmith-ignore": "^0.1.2",
-    "metalsmith-sections": "^1.0.0"
   }
 }
