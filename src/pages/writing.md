@@ -1,7 +1,7 @@
 ---
 title: Writing
 url: writing
-template: page.hbt
+template: writing.hbt
 ---
 
-Some debatably cerative stuff.
+Some debatably creative stuff.

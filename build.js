@@ -8,10 +8,12 @@ var Handlebars  = require('handlebars');
 var stylus 		= require('metalsmith-stylus');
 var metadata	= require('metalsmith-metadata');
 var branch 		= require('metalsmith-branch');
+var paginate    = require('metalsmith-paginate');
 var moment 		= require('moment');
 var jeet		= require('jeet');
 var axis 		= require('axis');
 var rupture		= require('rupture');
+var hljs		= require('highlight.js');
 
 
 Handlebars.registerHelper('formatDate', function(date) {
@@ -19,16 +21,16 @@ Handlebars.registerHelper('formatDate', function(date) {
 });
 
 var autoTemplate = function(config) {
-    var pattern = new RegExp(config.pattern);
+    // var pattern = new RegExp(config.pattern);
 
     return function(files, metalsmith, done) {
         for (var file in files) {
-            if (pattern.test(file)) {
+            // if (pattern.test(file)) {
                 var _f = files[file];
                 if (!_f.template) {
                     _f.template = config.templateName;
                 }
-            }
+            // }
         }
         done();
     };
@@ -58,7 +60,7 @@ Metalsmith(__dirname)
 		file: 'meta.json',
 	}))
 	.use(function (files, metalsmith, done) {
-		// This is my own "plugin" to load the metadata and register the Handlebars helper
+		// Register the Handlebars helper here because we need to ref metadata
 		var metadata = metalsmith.metadata().file;
 		Handlebars.registerHelper('link', function(path) {
 			return metadata.baseUrl + '/' + path;
@@ -66,11 +68,14 @@ Metalsmith(__dirname)
 		done();
 	})
 	.use(markdown({
-	  smartypants: true,
-	  gfm: true,
-	  tables: true
+		gfm: true,
+		tables: true,
+		smartypants: true,
+		smartLists: true,
+		highlight: function (code, lang, callback) {
+			return hljs.highlightAuto(lang, code).value;
+		}
 	}))
-	.use(excerpts())
 	.use(collections({
 		pages: {
 			pattern: 'pages/*.html'
@@ -87,29 +92,41 @@ Metalsmith(__dirname)
 			pattern: 'writing/*.html'
 		}
 	}))
-	.use(function (files, metalsmith, done) {
-		// console.log(files);
-		done();
-	})
-	.use(autoTemplate({
-		// Automatically supply the "post.hbt" template for everything in the posts
-		// collection.
-		pattern: 'blog/posts',
-		templateName: 'post.hbt'
-	}))
 	.use(branch('blog/posts/**.html')
+		.use(excerpts())
+		.use(autoTemplate({
+			// Automatically supply the "post.hbt" template for everything in the posts
+			// collection.
+			// pattern: 'blog/posts',
+			templateName: 'post.hbt'
+		}))
+		.use(paginate({
+			perPage: 10,
+			path: ':collection/page'
+		}))
 		.use(permalinks({
-			pattern: 'blog/:title'
+			pattern: 'blog/:date/:title',
+			date: 'YYYY/MM'
 		}))
 	)
 	.use(branch('pages/*.html')
+		.use(autoTemplate({
+			templateName: 'page.hbt'
+		}))
 		.use(permalinks({
 			pattern: ':url'
 		}))
+		.use(function (files, metalsmith, done) {
+			// console.log(files);
+			done();
+		})
 	)
 	.use(branch(anyCollections(['academics', 'writing']))
+		.use(autoTemplate({
+			templateName: 'page.hbt'
+		}))
 		.use(permalinks({
-			pattern: ':collection/:url'
+			pattern: ':collection/:title'
 		}))
 	)
 	// .use(branch('academics/*.html')

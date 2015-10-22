@@ -1,0 +1,1 @@
+// Mimic Hugo's shortcode behavior.

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>{{ title }} | Metalsmith Site</title>
+	
+	<link rel="stylesheet" type="text/css" href="{{ link 'styles/ms-site.css' }}" />
+</head>
+<body>
+
+<section class="container">
+{{> header }}
+{{> nav }}
+
+
+<h1>{{ title }}</h1>
+
+<article class="blogPosts">
+    <ul>
+        {{#each collections.academics}}
+            <li>
+                <h3><a href="{{link this.path}}">{{ this.title }}</a></h3>
+            </li>
+        {{/each}}
+    </ul>
+</article>
+
+</section>
+
+{{> footer}}
+
+</body>
+</html>

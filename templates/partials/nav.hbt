@@ -1,6 +1,8 @@
 <nav>
 	<a href="{{ link '' }}">Home</a>
 	<a href="{{ link 'portfolio/' }}">Portfolio</a>
+	<a href="{{ link 'academics/' }}">Academics</a>
+	<a href="{{ link 'writing/' }}">Writing</a>
 	<a href="{{ link 'about/' }}">About</a>
 	<a href="{{ link 'contact/' }}">Contact</a>
 	<a href="{{ link 'blog/' }}">Blog</a>
