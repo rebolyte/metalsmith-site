@@ -29,6 +29,22 @@
 {{/each}}
 </em>
 
+{{!-- confusing,  yes, but it's because the collection is reversed by date --}}
+<div class="nextPreviousLinks">
+{{#if this.next.path}}
+	<div class="previousLink">
+		<a href="{{ link this.next.path }}">Previous: {{ this.next.title }}</a>
+	</div>
+{{/if}}
+
+{{#if this.previous.path }}
+	<div class="nextLink">
+		<a href="{{ link this.previous.path }}">Next: {{ this.previous.title }}</a>
+	</div>
+{{/if}}
+<div style="clear: both"></div>
+</div>
+
 </section>
 
 {{> footer }}

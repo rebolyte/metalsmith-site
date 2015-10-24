@@ -135,6 +135,19 @@ nav a {
     margin-right: auto;
   }
 }
+.nextPreviousLinks {
+  margin: 10px 0px 10px 0px;
+}
+.nextLink {
+  width: 50%;
+  text-align: right;
+  float: right;
+}
+.previousLink {
+  width: 50%;
+  text-align: left;
+  float: left;
+}
 code {
   position: relative;
   display: block;
