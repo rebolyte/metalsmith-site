@@ -16,6 +16,8 @@
 
 <h1>{{ title }}</h1>
 
+{{{ this.contents }}}
+
 <article class="blogPosts">
     <ul>
         {{#each collections.writing}}

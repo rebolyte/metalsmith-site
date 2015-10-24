@@ -15,17 +15,18 @@
 
 <a href="{{ link 'blog/' }}"><< Back to the blog</a>
 
-<h2>{{ this.title }} </h2>
+<h2>Tag: {{ this.tag }}</h2>
 
-<h5>Posted by {{ this.author }} on {{ formatDate this.date }}</h5>
-
-{{{ contents }}}
-
-<em>Tagged with: 
-{{#each this.tags}}
-	<a href="{{ taglink this }}">{{ this }}</a>
+<ul>
+{{#each pagination.files}}
+    <li>
+        <h3><a href="{{link this.path}}">{{ this.title }}</a></h3>
+        <h5>Posted by {{ this.author }} on {{ formatDate this.date }}</h5>
+        <article>{{{ this.excerpt }}}</article>
+		<a href="{{ link this.path }}">Continue reading...</a>
+    </li>
 {{/each}}
-</em>
+</ul>
 
 </section>
 

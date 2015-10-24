@@ -2,6 +2,7 @@
 title: "Second Post"
 date: 2015-02-13
 author: James
+tags: programming, metaphysics
 ---
 
 A second blogpost. Here we are. Sed nec congue sapien, a finibus purus. Nam velit enim, commodo a posuere quis, maximus vitae nulla. Fusce ultricies elementum justo sit amet molestie. Pellentesque aliquet vulputate mi, id rhoncus magna aliquam sed. Nullam varius metus erat, ut imperdiet enim sodales vel. Vivamus tempor nibh a nunc condimentum, sed mollis metus malesuada. 

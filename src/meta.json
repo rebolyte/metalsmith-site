@@ -1,6 +1,0 @@
-{
-	"sitename": "My Metalsmith Site (DEV)",
-	"baseUrl": "http://localhost/metalsmith-site/build",
-	"description": "A test to see how Metalsmith works.",
-	"isDev": true
-}

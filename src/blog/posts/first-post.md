@@ -2,6 +2,7 @@
 title: "First Post"
 date: 2015-02-10
 author: James
+tags: programming, rant
 ---
 This is an amazing blogpost! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non est ultricies, interdum massa a, lacinia quam. Pellentesque non nibh congue, iaculis ipsum nec, molestie ante. Suspendisse tristique, risus in ornare mollis, neque arcu bibendum purus, in interdum sapien est vitae lorem. Nam convallis mauris ut leo bibendum tincidunt. Vestibulum magna enim, hendrerit ut semper vitae, blandit vitae sem. Praesent in nisi rhoncus, aliquet felis et, fringilla risus. Aliquam semper, magna ac dictum pretium, diam ante lacinia ligula, eu fermentum sem ante a libero. Maecenas vel porttitor dui. Mauris et egestas lectus. Vestibulum consequat, felis ut molestie ultrices, tellus ligula cursus sem, eu scelerisque tortor lorem a quam. Suspendisse eu nisi sapien. Maecenas sed libero eu arcu blandit gravida. Nam tristique orci eleifend odio aliquet tristique.
 

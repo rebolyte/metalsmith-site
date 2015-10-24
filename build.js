@@ -6,18 +6,28 @@ var excerpts 	= require('metalsmith-excerpts');
 var templates 	= require('metalsmith-templates');
 var Handlebars  = require('handlebars');
 var stylus 		= require('metalsmith-stylus');
-var metadata	= require('metalsmith-metadata');
+// var metadata	= require('metalsmith-metadata');
 var branch 		= require('metalsmith-branch');
 var paginate    = require('metalsmith-paginate');
+var tags 		= require('metalsmith-tags');
 var moment 		= require('moment');
 var jeet		= require('jeet');
 var axis 		= require('axis');
 var rupture		= require('rupture');
 var hljs		= require('highlight.js');
+var metadata 	= require('./config')(process.argv);
 
+
+Handlebars.registerHelper('link', function(path) {
+	return metadata.baseUrl + '/' + path;
+});
 
 Handlebars.registerHelper('formatDate', function(date) {
 	return moment(date).format('D-MMM-YYYY');
+});
+
+Handlebars.registerHelper('taglink', function(tag) {
+	return metadata.baseUrl + '/blog/tag/' + tag + '/';
 });
 
 var autoTemplate = function(config) {
@@ -54,19 +64,9 @@ var anyCollections = function (collections) {
 };
 
 Metalsmith(__dirname)
+	.metadata(metadata)
 	.source('./src')
 	.destination('./build')
-	.use(metadata({
-		file: 'meta.json',
-	}))
-	.use(function (files, metalsmith, done) {
-		// Register the Handlebars helper here because we need to ref metadata
-		var metadata = metalsmith.metadata().file;
-		Handlebars.registerHelper('link', function(path) {
-			return metadata.baseUrl + '/' + path;
-		});
-		done();
-	})
 	.use(markdown({
 		gfm: true,
 		tables: true,
@@ -92,23 +92,6 @@ Metalsmith(__dirname)
 			pattern: 'writing/*.html'
 		}
 	}))
-	.use(branch('blog/posts/**.html')
-		.use(excerpts())
-		.use(autoTemplate({
-			// Automatically supply the "post.hbt" template for everything in the posts
-			// collection.
-			// pattern: 'blog/posts',
-			templateName: 'post.hbt'
-		}))
-		.use(paginate({
-			perPage: 10,
-			path: ':collection/page'
-		}))
-		.use(permalinks({
-			pattern: 'blog/:date/:title',
-			date: 'YYYY/MM'
-		}))
-	)
 	.use(branch('pages/*.html')
 		.use(autoTemplate({
 			templateName: 'page.hbt'
@@ -129,26 +112,36 @@ Metalsmith(__dirname)
 			pattern: ':collection/:title'
 		}))
 	)
-	// .use(branch('academics/*.html')
-	// 	// .use(ignore(['academics/index.html']))
-	// 	.use(permalinks({
-	// 		pattern: 'academics/:url'
-	// 	}))
-	// )
-	// .use(branch('pages/**/*.html')
-	// 	.use(function (files, metalsmith, done) {
-	// 		// console.log(files);
-	// 		done();
-	// 	})
-	// 	.use(copy({
-	// 		pattern: 'pages/**',
-	// 		transform: function (file) {
-	// 			var filename = file.slice(6, -5);
-	// 			console.log(filename);
-	// 			return filename + '/index.html';
-	// 		}
-	// 	}))
-	// )
+	// This must come after the other branches, as the tags plugin messes up
+	// subsequent calls to permalinks. See 
+	// https://github.com/totocaster/metalsmith-tags/issues/21
+	.use(branch('blog/posts/**.html')
+		.use(excerpts())
+		.use(autoTemplate({
+			// Automatically supply the "post.hbt" template for everything in the posts
+			// collection.
+			// pattern: 'blog/posts',
+			templateName: 'post.hbt'
+		}))
+		.use(paginate({
+			perPage: 10,
+			path: ':collection/page'
+		}))
+		.use(permalinks({
+			pattern: 'blog/:date/:title',
+			date: 'YYYY/MM'
+		}))
+		.use(tags({
+			handle: 'tags',
+			path: 'blog/tag/:tag/index.html',
+			pathPage: 'blog/tag/:tag/:num/index.html',
+			perPage: 15,
+			template: 'tag.hbt',
+			sortBy: 'date',
+			reverse: true,
+			slug: {mode: 'rfc3986'}
+		}))
+	)
 	.use(templates({
 		engine: 'handlebars',
 		directory: 'templates',
@@ -159,7 +152,6 @@ Metalsmith(__dirname)
 		}
 	}))
 	.use(stylus({ use: [ jeet(), axis(), rupture() ] }))
-	// .use(stylus({ use: axis() }))
 	.build(function(err){
 		if (err) throw err;
 	});

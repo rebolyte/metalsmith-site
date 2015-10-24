@@ -19,10 +19,11 @@
     <ul>
         {{#each collections.posts}}
             <li>
-                <h3><a href="{{link this.path}}">{{ this.title }}</a></h3>
+                <h3><a href="{{ link this.path }}">{{ this.title }}</a></h3>
                 <h5>Posted by {{ this.author }} on {{ formatDate this.date }}</h5>
                 {{!-- can be this.contents to get the whole thing --}}
                 <article>{{{ this.excerpt }}}</article>
+                <a href="{{ link this.path }}">Continue reading...</a>
             </li>
         {{/each}}
     </ul>
