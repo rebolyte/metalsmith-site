@@ -135,6 +135,33 @@ nav a {
     margin-right: auto;
   }
 }
+code {
+  position: relative;
+  display: block;
+}
+code:before {
+  font-family: sans-serif;
+  font-weight: 100;
+  letter-spacing: 8px;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 20px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+code.lang-js:before {
+  content: "JavaScript";
+  color: #e33;
+}
+code.lang-html:before {
+  content: "HTML";
+  color: #3e3;
+}
+code.lang-markdown:before {
+  content: "Markdown";
+  color: #33e;
+}
 footer {
   font-size: 10pt;
   width: 800px;

@@ -5,6 +5,8 @@
 	
 	<title>{{ title }} | Metalsmith Site</title>
 	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="{{ link 'styles/tomorrow-night.css' }}" /> -->
 	<link rel="stylesheet" type="text/css" href="{{ link 'styles/ms-site.css' }}" />
 </head>
 <body>

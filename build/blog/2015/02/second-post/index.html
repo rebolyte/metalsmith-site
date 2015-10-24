@@ -5,6 +5,8 @@
 	
 	<title>Second Post | Metalsmith Site</title>
 	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://localhost/metalsmith-site/build/styles/tomorrow-night.css" /> -->
 	<link rel="stylesheet" type="text/css" href="http://localhost/metalsmith-site/build/styles/ms-site.css" />
 </head>
 <body>
@@ -26,8 +28,31 @@
 <h5>Posted by James on 12-Feb-2015</h5>
 
 <p>A second blogpost. Here we are. Sed nec congue sapien, a finibus purus. Nam velit enim, commodo a posuere quis, maximus vitae nulla. Fusce ultricies elementum justo sit amet molestie. Pellentesque aliquet vulputate mi, id rhoncus magna aliquam sed. Nullam varius metus erat, ut imperdiet enim sodales vel. Vivamus tempor nibh a nunc condimentum, sed mollis metus malesuada. </p>
+<pre><code class="lang-js"><span class="hljs-comment">// this is a code block</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-string">'This is a string.'</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params">a</span>) </span>{
+    <span class="hljs-comment">// this does nothing useful</span>
+    <span class="hljs-keyword">return</span> a;
+}
+</code></pre>
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris quis erat ornare, bibendum nunc nec, condimentum augue. Praesent laoreet velit eget diam bibendum egestas.</p>
-<p>Etiam dapibus, est eu bibendum tincidunt, sapien ex elementum orci, quis bibendum diam dolor vel nibh. Integer dignissim sapien et quam molestie, nec vehicula risus bibendum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam vulputate condimentum elit, sed blandit ex scelerisque eget. Aenean auctor tellus nec ipsum sollicitudin hendrerit. Curabitur id est efficitur, placerat quam et, rutrum leo. Donec eu nisi ultricies, rutrum enim ut, pellentesque urna. Duis augue lorem, sodales sit amet tincidunt nec, sagittis at ex. Nulla nec pellentesque mi. Morbi in dui sit amet metus porttitor convallis. Donec vestibulum in erat a ultrices.</p>
+<pre><code class="lang-markdown"><span class="hljs-header">## Title </span>
+
+This is some text.
+</code></pre>
+<p>becomes </p>
+<pre><code class="lang-html"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>This is some text.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<p>Unmarked code block:</p>
+<pre><code><span class="hljs-comment">&lt;!-- this is code --&gt;</span>
+</code></pre><p>Etiam dapibus, est eu bibendum tincidunt, sapien ex elementum orci, quis bibendum diam dolor vel nibh. Integer dignissim sapien et quam molestie, nec vehicula risus bibendum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam vulputate condimentum elit, sed blandit ex scelerisque eget. Aenean auctor tellus nec ipsum sollicitudin hendrerit. Curabitur id est efficitur, placerat quam et, rutrum leo. Donec eu nisi ultricies, rutrum enim ut, pellentesque urna. Duis augue lorem, sodales sit amet tincidunt nec, sagittis at ex. Nulla nec pellentesque mi. Morbi in dui sit amet metus porttitor convallis. Donec vestibulum in erat a ultrices.</p>
 
 
 <em>Tagged with: 

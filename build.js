@@ -6,7 +6,6 @@ var excerpts 	= require('metalsmith-excerpts');
 var templates 	= require('metalsmith-templates');
 var Handlebars  = require('handlebars');
 var stylus 		= require('metalsmith-stylus');
-// var metadata	= require('metalsmith-metadata');
 var branch 		= require('metalsmith-branch');
 var paginate    = require('metalsmith-paginate');
 var tags 		= require('metalsmith-tags');
@@ -30,6 +29,7 @@ Handlebars.registerHelper('taglink', function(tag) {
 	return metadata.baseUrl + '/blog/tag/' + tag + '/';
 });
 
+// Thanks @RobinThrift
 var autoTemplate = function(config) {
     // var pattern = new RegExp(config.pattern);
 
@@ -73,7 +73,21 @@ Metalsmith(__dirname)
 		smartypants: true,
 		smartLists: true,
 		highlight: function (code, lang, callback) {
-			return hljs.highlightAuto(lang, code).value;
+			// https://github.com/MoOx/metalsmith-md/blob/master/README.md
+			// language is recognized by highlight.js
+			if (lang && hljs.getLanguage(lang)) {
+				try {
+					return hljs.highlight(lang, code).value;
+				} catch (e) {}
+			}
+
+			// fallback to auto
+			try {
+				return hljs.highlightAuto(code).value;
+			} catch (e) {}
+
+			// use external default escaping
+			return '';
 		}
 	}))
 	.use(collections({
